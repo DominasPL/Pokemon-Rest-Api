@@ -34,6 +34,8 @@ public class PokemonConverter {
             pokemonDTOList.add(pokemonDTO);
         }
 
+        pokemonDTOList.sort((o1, o2) -> o1.getPokemonID().compareTo(o2.getPokemonID()));
+
         return pokemonDTOList;
     }
 }
