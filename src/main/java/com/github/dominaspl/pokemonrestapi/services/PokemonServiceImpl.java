@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -33,4 +34,16 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
 
+    public PokemonDTO findPokemonById(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Pokemon> optionalPokemon = pokemonRepository.findById(id);
+        Pokemon pokemon = optionalPokemon.orElse(new Pokemon());
+
+        return PokemonConverter.convertToPokemonDTO(pokemon);
+
+    }
 }

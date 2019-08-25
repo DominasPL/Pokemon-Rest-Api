@@ -7,6 +7,7 @@ import com.github.dominaspl.pokemonrestapi.models.Type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class PokemonConverter {
 
@@ -16,26 +17,23 @@ public class PokemonConverter {
         List<PokemonDTO> pokemonDTOList = new ArrayList<>();
 
         for (Pokemon pokemon : pokemonList) {
-
-            PokemonDTO pokemonDTO = new PokemonDTO();
-            pokemonDTO.setPokemonID(pokemon.getPokemonID());
-            pokemonDTO.setPokemonName(pokemon.getPokemonName());
-
-            List<Type> pokemonTypes = pokemon.getTypes();
-            List<TypeDTO> pokemonDTOTypes = new ArrayList<>();
-            for (Type type : pokemonTypes) {
-                TypeDTO typeDTO = new TypeDTO();
-                typeDTO.setTypeID(type.getTypeID());
-                typeDTO.setTypeName(type.getTypeName());
-                pokemonDTOTypes.add(typeDTO);
-            }
-
-            pokemonDTO.setTypes(pokemonDTOTypes);
-            pokemonDTOList.add(pokemonDTO);
+            pokemonDTOList.add(convertToPokemonDTO(pokemon));
         }
 
         pokemonDTOList.sort((o1, o2) -> o1.getPokemonID().compareTo(o2.getPokemonID()));
 
         return pokemonDTOList;
     }
+
+    public static PokemonDTO convertToPokemonDTO(Pokemon pokemon) {
+
+        PokemonDTO pokemonDTO = new PokemonDTO();
+        pokemonDTO.setPokemonID(pokemon.getPokemonID());
+        pokemonDTO.setPokemonName(pokemon.getPokemonName());
+        pokemonDTO.setTypes(TypeConverter.convertToTypeDTOList(pokemon.getTypes()));
+
+        return pokemonDTO;
+    }
+
+
 }
