@@ -21,7 +21,9 @@ public class Pokemon {
     @Column(nullable = false, unique = true)
     private String pokemonName;
 
-    @ManyToMany(mappedBy = "pokemons")
+    @ManyToMany
+    @JoinTable(name = "pokemons_types", joinColumns = @JoinColumn(name = "pokemon_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> types = new ArrayList<>();
 
 

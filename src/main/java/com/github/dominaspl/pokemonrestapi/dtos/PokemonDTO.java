@@ -12,7 +12,7 @@ public class PokemonDTO {
 
     private Long pokemonID;
     private String pokemonName;
-    private List<TypeDTO> typeDTOS = new ArrayList<>();
+    private List<TypeDTO> types = new ArrayList<>();
 
 
 }

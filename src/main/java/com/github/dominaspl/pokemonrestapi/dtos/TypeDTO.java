@@ -8,6 +8,6 @@ import lombok.RequiredArgsConstructor;
 public class TypeDTO {
 
     private Long typeID;
-    private String typeNm;
+    private String typeName;
 
 }

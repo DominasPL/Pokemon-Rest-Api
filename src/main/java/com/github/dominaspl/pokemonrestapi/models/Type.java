@@ -19,11 +19,9 @@ public class Type {
     private Long typeID;
 
     @Column(nullable = false, unique = true)
-    private String typeNm;
+    private String typeName;
 
-    @ManyToMany
-    @JoinTable(name = "pokemons_types", joinColumns = @JoinColumn(name = "type_id"),
-    inverseJoinColumns = @JoinColumn(name = "pokemon_id"))
+    @ManyToMany(mappedBy = "types")
     private List<Pokemon> pokemons = new ArrayList<>();
 
 

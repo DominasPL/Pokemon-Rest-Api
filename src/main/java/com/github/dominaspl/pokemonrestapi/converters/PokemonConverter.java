@@ -26,11 +26,11 @@ public class PokemonConverter {
             for (Type type : pokemonTypes) {
                 TypeDTO typeDTO = new TypeDTO();
                 typeDTO.setTypeID(type.getTypeID());
-                typeDTO.setTypeNm(type.getTypeNm());
+                typeDTO.setTypeName(type.getTypeName());
                 pokemonDTOTypes.add(typeDTO);
             }
 
-            pokemonDTO.setTypeDTOS(pokemonDTOTypes);
+            pokemonDTO.setTypes(pokemonDTOTypes);
             pokemonDTOList.add(pokemonDTO);
         }
 
