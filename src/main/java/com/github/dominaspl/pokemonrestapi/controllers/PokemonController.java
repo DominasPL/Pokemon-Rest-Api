@@ -21,7 +21,7 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    @GetMapping
+    @GetMapping(produces = {"application/xml"})
     public List<PokemonDTO> getAllPokemons() {
         return pokemonService.findAllPokemons();
     }
@@ -30,5 +30,7 @@ public class PokemonController {
     public PokemonDTO getPokemonById(@PathVariable("id") Long id) {
         return pokemonService.findPokemonById(id);
     }
+
+
 
 }
