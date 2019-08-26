@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @RequiredArgsConstructor
-@XmlRootElement
+//@XmlRootElement
 public class PokemonDTO {
 
     private Long pokemonID;

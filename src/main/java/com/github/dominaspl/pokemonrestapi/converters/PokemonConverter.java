@@ -7,6 +7,7 @@ import com.github.dominaspl.pokemonrestapi.models.Type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class PokemonConverter {
@@ -35,5 +36,12 @@ public class PokemonConverter {
         return pokemonDTO;
     }
 
+    public static Pokemon convertToPokemon(String pokemonName, Set<TypeDTO> correctTypes) {
 
+        Pokemon pokemon = new Pokemon();
+        pokemon.setPokemonName(pokemonName);
+        pokemon.setTypes(TypeConverter.convertToTypeList(new ArrayList<>(correctTypes)));
+        return pokemon;
+
+    }
 }

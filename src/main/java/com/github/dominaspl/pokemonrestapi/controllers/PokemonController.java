@@ -2,10 +2,7 @@ package com.github.dominaspl.pokemonrestapi.controllers;
 
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
 import com.github.dominaspl.pokemonrestapi.services.PokemonServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    @GetMapping(produces = {"application/xml"})
+    @GetMapping
     public List<PokemonDTO> getAllPokemons() {
         return pokemonService.findAllPokemons();
     }
@@ -31,6 +28,11 @@ public class PokemonController {
         return pokemonService.findPokemonById(id);
     }
 
+    @PostMapping("/pokemon")
+    public PokemonDTO addPokemon(@RequestBody PokemonDTO pokemonDTO) {
 
+        pokemonService.savePokemon(pokemonDTO);
+        return pokemonDTO;
+    }
 
 }

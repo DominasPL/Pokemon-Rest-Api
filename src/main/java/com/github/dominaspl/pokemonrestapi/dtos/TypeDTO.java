@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @RequiredArgsConstructor
-@XmlRootElement
+//@XmlRootElement
 public class TypeDTO {
 
     private Long typeID;

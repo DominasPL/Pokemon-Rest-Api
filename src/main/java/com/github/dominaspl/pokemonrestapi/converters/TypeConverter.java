@@ -23,4 +23,25 @@ public class TypeConverter {
         return typeDTOList;
 
     }
+
+    public static List<Type> convertToTypeList(List<TypeDTO> typesDTOList) {
+
+        List<Type> types = new ArrayList<>();
+
+        for (TypeDTO typeDTO : typesDTOList) {
+            Type type = new Type();
+            type.setTypeID(typeDTO.getTypeID());
+            type.setTypeName(typeDTO.getTypeName());
+            types.add(type);
+        }
+
+        return types;
+    }
+
+    public static Type convertToType(TypeDTO typeDTO) {
+
+        Type type = new Type();
+        type.setTypeName(typeDTO.getTypeName());
+        return type;
+    }
 }
