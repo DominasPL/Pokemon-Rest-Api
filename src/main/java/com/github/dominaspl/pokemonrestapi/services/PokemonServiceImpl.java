@@ -1,6 +1,7 @@
 package com.github.dominaspl.pokemonrestapi.services;
 
 import com.github.dominaspl.pokemonrestapi.converters.PokemonConverter;
+import com.github.dominaspl.pokemonrestapi.converters.TypeConverter;
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.models.Pokemon;
@@ -10,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -69,5 +67,30 @@ public class PokemonServiceImpl implements PokemonService {
             pokemonRepository.save(pokemon);
         }
     }
+
+    @Override
+    @Transactional
+    public void updatePokemon(Long id, PokemonDTO pokemonDTO) {
+
+        if (id == null || pokemonDTO == null) {
+            throw new IllegalArgumentException("Id && pokemon && types must be given!");
+        }
+
+        Optional<Pokemon> optionalPokemon = pokemonRepository.findById(id);
+        Pokemon pokemon = optionalPokemon.orElse(new Pokemon());
+
+        if (pokemon.getPokemonID() == null) {
+            savePokemon(pokemonDTO);
+        } else {
+            Set<TypeDTO> correctTypes = typeService.checkTypesInDatabase(pokemonDTO.getTypes());
+            if (!correctTypes.isEmpty()) {
+                pokemon.setPokemonName(pokemonDTO.getPokemonName());
+                pokemon.setTypes(TypeConverter.convertToTypeList(new ArrayList<>(correctTypes)));
+                pokemonRepository.save(pokemon);
+            }
+        }
+    }
+
+
 
 }

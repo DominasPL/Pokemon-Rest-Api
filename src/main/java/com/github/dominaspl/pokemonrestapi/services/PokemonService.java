@@ -9,5 +9,6 @@ public interface PokemonService {
     List<PokemonDTO> findAllPokemons();
     PokemonDTO findPokemonById(Long id);
     void savePokemon(PokemonDTO pokemonDTO);
+    void updatePokemon(Long id, PokemonDTO pokemonDTO);
 
 }

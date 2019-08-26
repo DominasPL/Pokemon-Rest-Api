@@ -1,6 +1,7 @@
 package com.github.dominaspl.pokemonrestapi.controllers;
 
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
+import com.github.dominaspl.pokemonrestapi.models.Pokemon;
 import com.github.dominaspl.pokemonrestapi.services.PokemonServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,10 +30,15 @@ public class PokemonController {
     }
 
     @PostMapping("/pokemon")
-    public PokemonDTO addPokemon(@RequestBody PokemonDTO pokemonDTO) {
+    public void addPokemon(@RequestBody PokemonDTO pokemonDTO) {
 
         pokemonService.savePokemon(pokemonDTO);
-        return pokemonDTO;
+    }
+
+    @PutMapping("/pokemon/{id}")
+    public void updatePokemon(@PathVariable("id") Long id, @RequestBody PokemonDTO pokemonDTO) {
+
+        pokemonService.updatePokemon(id, pokemonDTO);
     }
 
 }
