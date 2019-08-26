@@ -41,4 +41,9 @@ public class PokemonController {
         pokemonService.updatePokemon(id, pokemonDTO);
     }
 
+    @DeleteMapping("/pokemon/{id}")
+    public void deletePokemon(@PathVariable("id") Long id) {
+        pokemonService.deletePokemonFromRestApi(id);
+    }
+
 }

@@ -26,5 +26,6 @@ public class Pokemon {
             inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> types = new ArrayList<>();
 
-
+    @ManyToOne
+    private State state;
 }

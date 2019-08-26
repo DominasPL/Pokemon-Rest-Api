@@ -91,6 +91,16 @@ public class PokemonServiceImpl implements PokemonService {
         }
     }
 
+    @Override
+    @Transactional
+    public void deletePokemonFromRestApi(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+
+    }
 
 
 }
