@@ -30,7 +30,7 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public List<PokemonDTO> findAllPokemons() {
 
-        List<Pokemon> pokemonList = pokemonRepository.findAll();
+        List<Pokemon> pokemonList = pokemonRepository.findPokemonByState(stateService.findAllStates().get(0));
 
         if (pokemonList.isEmpty()) {
             throw new IllegalStateException("Pokemons not found!");

@@ -1,7 +1,7 @@
 package com.github.dominaspl.pokemonrestapi.controllers;
 
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
-import com.github.dominaspl.pokemonrestapi.services.PokemonServiceImpl;
+import com.github.dominaspl.pokemonrestapi.services.PokemonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,9 @@ public class PokemonController {
 
     public static final String BASE_URL = "/api/v1/pokemons";
 
-    private PokemonServiceImpl pokemonService;
+    private PokemonService pokemonService;
 
-    public PokemonController(PokemonServiceImpl pokemonService) {
+    public PokemonController(PokemonService pokemonService) {
         this.pokemonService = pokemonService;
     }
 
