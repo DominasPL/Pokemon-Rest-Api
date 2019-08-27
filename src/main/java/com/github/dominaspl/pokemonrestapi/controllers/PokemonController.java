@@ -1,7 +1,6 @@
 package com.github.dominaspl.pokemonrestapi.controllers;
 
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
-import com.github.dominaspl.pokemonrestapi.models.Pokemon;
 import com.github.dominaspl.pokemonrestapi.services.PokemonServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +48,8 @@ public class PokemonController {
 
     @DeleteMapping("/pokemon/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deletePokemon(@PathVariable("id") Long id) {
-        pokemonService.deletePokemonFromRestApi(id);
+    public PokemonDTO deletePokemon(@PathVariable("id") Long id) {
+        return pokemonService.deletePokemonFromRestApi(id);
     }
 
 }

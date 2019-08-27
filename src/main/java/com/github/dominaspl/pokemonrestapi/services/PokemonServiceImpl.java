@@ -5,10 +5,9 @@ import com.github.dominaspl.pokemonrestapi.converters.TypeConverter;
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.models.Pokemon;
-import com.github.dominaspl.pokemonrestapi.models.Type;
+import com.github.dominaspl.pokemonrestapi.models.State;
 import com.github.dominaspl.pokemonrestapi.repositories.PokemonRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.Response;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +19,12 @@ public class PokemonServiceImpl implements PokemonService {
 
     private PokemonRepository pokemonRepository;
     private TypeService typeService;
+    private StateService stateService;
 
-    public PokemonServiceImpl(PokemonRepository pokemonRepository, TypeService typeService) {
+    public PokemonServiceImpl(PokemonRepository pokemonRepository, TypeService typeService, StateService stateService) {
         this.pokemonRepository = pokemonRepository;
         this.typeService = typeService;
+        this.stateService = stateService;
     }
 
     @Override
@@ -104,16 +105,24 @@ public class PokemonServiceImpl implements PokemonService {
 
     @Override
     @Transactional
-    public void deletePokemonFromRestApi(Long id) {
+    public PokemonDTO deletePokemonFromRestApi(Long id) {
 
         if (id == null) {
             throw new IllegalArgumentException("Id must be given!");
         }
 
+        Optional<Pokemon> optionalPokemon = pokemonRepository.findById(id);
+        Pokemon pokemon = optionalPokemon.orElse(null);
 
+        if (pokemon == null) {
+            throw new IllegalStateException("Pokemon not found!");
+        }
 
+        List<State> allStates = stateService.findAllStates();
+        pokemon.setState(allStates.get(1));
 
+        pokemonRepository.save(pokemon);
+
+        return PokemonConverter.convertToPokemonDTO(pokemon);
     }
-
-
 }

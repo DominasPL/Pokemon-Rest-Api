@@ -15,6 +15,8 @@ public class State {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean isActive;
+    private Boolean isActive;
+
+
 
 }
