@@ -3,6 +3,7 @@ package com.github.dominaspl.pokemonrestapi.dtos;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlRootElement;
 
 

@@ -8,6 +8,7 @@ import com.github.dominaspl.pokemonrestapi.models.Pokemon;
 import com.github.dominaspl.pokemonrestapi.models.Type;
 import com.github.dominaspl.pokemonrestapi.repositories.PokemonRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Response;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,7 @@ public class PokemonServiceImpl implements PokemonService {
 
         List<Pokemon> pokemonList = pokemonRepository.findAll();
 
-        if (pokemonList == null) {
+        if (pokemonList.isEmpty()) {
             throw new IllegalStateException("Pokemons not found!");
         }
 
@@ -54,7 +55,7 @@ public class PokemonServiceImpl implements PokemonService {
 
     @Override
     @Transactional
-    public void savePokemon(PokemonDTO pokemonDTO) {
+    public PokemonDTO savePokemon(PokemonDTO pokemonDTO) {
 
         if (pokemonDTO == null) {
             throw new IllegalArgumentException("Pokemon must be given!");
@@ -62,15 +63,19 @@ public class PokemonServiceImpl implements PokemonService {
 
         Set<TypeDTO> correctTypes = typeService.checkTypesInDatabase(pokemonDTO.getTypes());
 
-        if (!correctTypes.isEmpty()) {
-            Pokemon pokemon = PokemonConverter.convertToPokemon(pokemonDTO.getPokemonName(), correctTypes);
-            pokemonRepository.save(pokemon);
+        if (correctTypes.isEmpty()) {
+            throw new IllegalStateException("Types not found!");
         }
+
+        Pokemon pokemon = PokemonConverter.convertToPokemon(pokemonDTO.getPokemonName(), correctTypes);
+        pokemonRepository.save(pokemon);
+
+        return PokemonConverter.convertToPokemonDTO(pokemon);
     }
 
     @Override
     @Transactional
-    public void updatePokemon(Long id, PokemonDTO pokemonDTO) {
+    public PokemonDTO updatePokemon(Long id, PokemonDTO pokemonDTO) {
 
         if (id == null || pokemonDTO == null) {
             throw new IllegalArgumentException("Id && pokemon && types must be given!");
@@ -80,15 +85,21 @@ public class PokemonServiceImpl implements PokemonService {
         Pokemon pokemon = optionalPokemon.orElse(new Pokemon());
 
         if (pokemon.getPokemonID() == null) {
-            savePokemon(pokemonDTO);
+            return savePokemon(pokemonDTO);
         } else {
+
             Set<TypeDTO> correctTypes = typeService.checkTypesInDatabase(pokemonDTO.getTypes());
-            if (!correctTypes.isEmpty()) {
-                pokemon.setPokemonName(pokemonDTO.getPokemonName());
-                pokemon.setTypes(TypeConverter.convertToTypeList(new ArrayList<>(correctTypes)));
-                pokemonRepository.save(pokemon);
+
+            if (correctTypes.isEmpty()) {
+                throw new IllegalStateException("Types not found!");
             }
+
+            pokemon.setPokemonName(pokemonDTO.getPokemonName());
+            pokemon.setTypes(TypeConverter.convertToTypeList(new ArrayList<>(correctTypes)));
+            pokemonRepository.save(pokemon);
         }
+
+        return PokemonConverter.convertToPokemonDTO(pokemon);
     }
 
     @Override
