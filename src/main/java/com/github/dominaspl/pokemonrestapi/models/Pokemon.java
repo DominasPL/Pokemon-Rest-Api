@@ -27,9 +27,10 @@ public class Pokemon {
     private List<Type> types = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "state_id", referencedColumnName = "state_id")
     private State state;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "base_stats_id", referencedColumnName = "baseStatsID")
+    @JoinColumn(name = "base_stats_id", referencedColumnName = "base_stats_id")
     private BaseStats baseStats;
 }

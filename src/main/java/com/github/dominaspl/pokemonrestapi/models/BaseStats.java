@@ -13,6 +13,7 @@ public class BaseStats {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "base_stats_id")
     private Long baseStatsID;
 
     @Column(nullable = false)
