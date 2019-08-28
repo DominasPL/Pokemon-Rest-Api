@@ -5,13 +5,15 @@ import com.github.dominaspl.pokemonrestapi.converters.TypeConverter;
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.models.Pokemon;
-import com.github.dominaspl.pokemonrestapi.models.State;
 import com.github.dominaspl.pokemonrestapi.repositories.PokemonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -118,8 +120,7 @@ public class PokemonServiceImpl implements PokemonService {
             throw new IllegalStateException("Pokemon not found!");
         }
 
-        List<State> allStates = stateService.findAllStates();
-        pokemon.setState(allStates.get(1));
+        pokemon.setState(stateService.findAllStates().get(1));
 
         pokemonRepository.save(pokemon);
 

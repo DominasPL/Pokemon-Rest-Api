@@ -28,4 +28,8 @@ public class Pokemon {
 
     @ManyToOne
     private State state;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "base_stats_id", referencedColumnName = "baseStatsID")
+    private BaseStats baseStats;
 }

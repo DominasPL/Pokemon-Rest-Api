@@ -13,7 +13,7 @@ public class State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long stateID;
 
     private Boolean isActive;
 
