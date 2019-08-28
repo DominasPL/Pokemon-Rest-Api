@@ -3,12 +3,10 @@ package com.github.dominaspl.pokemonrestapi.converters;
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.models.Pokemon;
-import com.github.dominaspl.pokemonrestapi.models.Type;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 public class PokemonConverter {
 
@@ -32,6 +30,7 @@ public class PokemonConverter {
         pokemonDTO.setPokemonID(pokemon.getPokemonID());
         pokemonDTO.setPokemonName(pokemon.getPokemonName());
         pokemonDTO.setTypes(TypeConverter.convertToTypeDTOList(pokemon.getTypes()));
+        pokemonDTO.setBaseStats(BaseStatsConverter.convertToBaseStatsDTO(pokemon.getBaseStats()));
 
         return pokemonDTO;
     }

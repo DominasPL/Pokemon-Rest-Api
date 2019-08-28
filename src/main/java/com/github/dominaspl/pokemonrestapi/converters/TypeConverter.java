@@ -24,7 +24,7 @@ public class TypeConverter {
 
     }
 
-    public static List<Type> convertToTypeList(List<TypeDTO> typesDTOList) {
+            public static List<Type> convertToTypeList(List<TypeDTO> typesDTOList) {
 
         List<Type> types = new ArrayList<>();
 

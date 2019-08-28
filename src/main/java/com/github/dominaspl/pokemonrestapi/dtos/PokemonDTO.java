@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class PokemonDTO {
     @NotEmpty(message = "Pokemon name must be given!")
     private String pokemonName;
     private List<TypeDTO> types = new ArrayList<>();
+    private BaseStatsDTO baseStats;
 
 
 }
