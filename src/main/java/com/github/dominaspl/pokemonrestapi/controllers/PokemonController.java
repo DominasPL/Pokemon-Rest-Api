@@ -35,7 +35,6 @@ public class PokemonController {
     @PostMapping("/pokemon")
     @ResponseStatus(HttpStatus.CREATED)
     public PokemonDTO addPokemon(@Valid @RequestBody PokemonDTO pokemonDTO) {
-
         return pokemonService.savePokemon(pokemonDTO);
     }
 

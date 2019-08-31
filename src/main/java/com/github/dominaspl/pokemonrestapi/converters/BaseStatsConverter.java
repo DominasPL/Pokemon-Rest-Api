@@ -17,4 +17,15 @@ public class BaseStatsConverter {
 
         return baseStatsDTO;
     }
+
+    public static BaseStats convertToBaseStats(BaseStatsDTO baseStatsDTO) {
+
+        BaseStats baseStats = new BaseStats();
+        baseStats.setAttack(baseStatsDTO.getAttack());
+        baseStats.setDefense(baseStatsDTO.getDefense());
+        baseStats.setSpeed(baseStatsDTO.getSpeed());
+        baseStats.setHp(baseStatsDTO.getHp());
+
+        return baseStats;
+    }
 }

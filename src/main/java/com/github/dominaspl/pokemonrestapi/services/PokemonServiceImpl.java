@@ -70,7 +70,8 @@ public class PokemonServiceImpl implements PokemonService {
             throw new IllegalStateException("Types not found!");
         }
 
-        Pokemon pokemon = PokemonConverter.convertToPokemon(pokemonDTO.getPokemonName(), correctTypes);
+        Pokemon pokemon = PokemonConverter.convertToPokemon(pokemonDTO, correctTypes, stateService.findAllStates().get(0));
+
         pokemonRepository.save(pokemon);
 
         return PokemonConverter.convertToPokemonDTO(pokemon);
