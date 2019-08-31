@@ -1,5 +1,6 @@
 package com.github.dominaspl.pokemonrestapi.services;
 
+import com.github.dominaspl.pokemonrestapi.converters.BaseStatsConverter;
 import com.github.dominaspl.pokemonrestapi.converters.PokemonConverter;
 import com.github.dominaspl.pokemonrestapi.converters.TypeConverter;
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
@@ -82,13 +83,13 @@ public class PokemonServiceImpl implements PokemonService {
     public PokemonDTO updatePokemon(Long id, PokemonDTO pokemonDTO) {
 
         if (id == null || pokemonDTO == null) {
-            throw new IllegalArgumentException("Id && pokemon && types must be given!");
+            throw new IllegalArgumentException("Id and pokemon must be given!");
         }
 
         Optional<Pokemon> optionalPokemon = pokemonRepository.findById(id);
-        Pokemon pokemon = optionalPokemon.orElse(new Pokemon());
+        Pokemon pokemon = optionalPokemon.orElse(null);
 
-        if (pokemon.getPokemonID() == null) {
+        if (pokemon == null) {
             return savePokemon(pokemonDTO);
         } else {
 
@@ -100,6 +101,7 @@ public class PokemonServiceImpl implements PokemonService {
 
             pokemon.setPokemonName(pokemonDTO.getPokemonName());
             pokemon.setTypes(TypeConverter.convertToTypeList(new ArrayList<>(correctTypes)));
+            pokemon.setBaseStats(BaseStatsConverter.convertToBaseStats(pokemon.getBaseStats().getBaseStatsID(), pokemonDTO.getBaseStats()));
             pokemonRepository.save(pokemon);
         }
 
