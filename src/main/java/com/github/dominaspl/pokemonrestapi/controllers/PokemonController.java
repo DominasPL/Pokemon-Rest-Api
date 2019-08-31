@@ -3,12 +3,15 @@ package com.github.dominaspl.pokemonrestapi.controllers;
 import com.github.dominaspl.pokemonrestapi.dtos.PokemonDTO;
 import com.github.dominaspl.pokemonrestapi.services.PokemonService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping(PokemonController.BASE_URL)
 public class PokemonController {
 
@@ -28,7 +31,7 @@ public class PokemonController {
 
     @GetMapping("/pokemon/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PokemonDTO getPokemonById(@PathVariable("id") Long id) {
+    public PokemonDTO getPokemonById(@PathVariable("id") @Positive Long id) {
         return pokemonService.findPokemonById(id);
     }
 
@@ -40,14 +43,14 @@ public class PokemonController {
 
     @PutMapping("/pokemon/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public PokemonDTO updatePokemon(@PathVariable("id") Long id, @Valid @RequestBody PokemonDTO pokemonDTO) {
+    public PokemonDTO updatePokemon(@PathVariable("id") @Positive Long id, @Valid @RequestBody PokemonDTO pokemonDTO) {
 
         return pokemonService.updatePokemon(id, pokemonDTO);
     }
 
     @DeleteMapping("/pokemon/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PokemonDTO deletePokemon(@PathVariable("id") Long id) {
+    public PokemonDTO deletePokemon(@PathVariable("id") @Positive Long id) {
         return pokemonService.deletePokemonFromRestApi(id);
     }
 

@@ -50,7 +50,7 @@ public class PokemonServiceImpl implements PokemonService {
         }
 
         Optional<Pokemon> optionalPokemon = pokemonRepository.findById(id);
-        Pokemon pokemon = optionalPokemon.orElse(new Pokemon());
+        Pokemon pokemon = optionalPokemon.orElseThrow(() -> new IllegalStateException("Pokemon not found!"));
 
         return PokemonConverter.convertToPokemonDTO(pokemon);
 
