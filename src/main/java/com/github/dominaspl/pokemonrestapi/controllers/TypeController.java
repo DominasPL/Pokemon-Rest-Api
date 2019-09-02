@@ -5,6 +5,7 @@ import com.github.dominaspl.pokemonrestapi.services.TypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -32,5 +33,12 @@ public class TypeController {
         return typeService.findTypeById(id);
     }
 
+    @PostMapping("/types/type")
+    @ResponseStatus(HttpStatus.CREATED)
+    public TypeDTO addNewType(@Valid @RequestBody TypeDTO typeDTO) {
+
+        typeService.saveType(typeDTO);
+        return typeDTO;
+    }
 
 }

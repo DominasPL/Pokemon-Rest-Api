@@ -12,7 +12,6 @@ public class TypeConverter {
     public static List<TypeDTO> convertToTypeDTOList(List<Type> pokemonTypes) {
 
         List<TypeDTO> typeDTOList = new ArrayList<>();
-
         for (Type type : pokemonTypes) {
             TypeDTO typeDTO = new TypeDTO();
             typeDTO.setTypeName(type.getTypeName());
@@ -20,7 +19,6 @@ public class TypeConverter {
         }
 
         typeDTOList.sort((t1, t2) -> t1.getTypeName().compareToIgnoreCase(t2.getTypeName()));
-
         return typeDTOList;
 
     }
@@ -43,5 +41,12 @@ public class TypeConverter {
         TypeDTO typeDTO = new TypeDTO();
         typeDTO.setTypeName(type.getTypeName());
         return typeDTO;
+    }
+
+    public static Type convertToType(TypeDTO typeDTO) {
+
+        Type type = new Type();
+        type.setTypeName(typeDTO.getTypeName());
+        return type;
     }
 }

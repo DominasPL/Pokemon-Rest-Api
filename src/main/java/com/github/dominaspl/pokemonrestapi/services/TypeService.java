@@ -10,4 +10,5 @@ public interface TypeService {
     List<TypeDTO> findAllTypes();
     TypeDTO findTypeById(Long id);
     Set<TypeDTO> checkTypesInDatabase(List<TypeDTO> types);
+    void saveType(TypeDTO typeDTO);
 }
