@@ -97,6 +97,10 @@ public class PokemonServiceImpl implements PokemonService {
             return savePokemon(pokemonDTO);
         } else {
 
+            if (!pokemon.getState().getIsActive()) {
+                throw new IllegalStateException("It is not possible to update deleted pokemon!");
+            }
+
             Set<TypeDTO> correctTypes = typeService.checkTypesInDatabase(pokemonDTO.getTypes());
 
             if (correctTypes.isEmpty()) {
@@ -106,6 +110,7 @@ public class PokemonServiceImpl implements PokemonService {
             pokemon.setPokemonName(pokemonDTO.getPokemonName());
             pokemon.setTypes(TypeConverter.convertToTypeList(new ArrayList<>(correctTypes)));
             pokemon.setBaseStats(BaseStatsConverter.convertToBaseStats(pokemon.getBaseStats().getBaseStatsID(), pokemonDTO.getBaseStats()));
+
             pokemonRepository.save(pokemon);
         }
 
@@ -123,7 +128,7 @@ public class PokemonServiceImpl implements PokemonService {
         Optional<Pokemon> optionalPokemon = pokemonRepository.findById(id);
         Pokemon pokemon = optionalPokemon.orElse(null);
 
-        if (pokemon == null) {
+        if (pokemon == null || !pokemon.getState().getIsActive()) {
             throw new IllegalStateException("Pokemon not found!");
         }
 
