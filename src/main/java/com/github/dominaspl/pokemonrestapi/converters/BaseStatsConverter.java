@@ -9,7 +9,6 @@ public class BaseStatsConverter {
     public static BaseStatsDTO convertToBaseStatsDTO(BaseStats baseStats) {
 
         BaseStatsDTO baseStatsDTO = new BaseStatsDTO();
-        baseStatsDTO.setBaseStatsID(baseStats.getBaseStatsID());
         baseStatsDTO.setHp(baseStats.getHp());
         baseStatsDTO.setAttack(baseStats.getAttack());
         baseStatsDTO.setDefense(baseStats.getDefense());

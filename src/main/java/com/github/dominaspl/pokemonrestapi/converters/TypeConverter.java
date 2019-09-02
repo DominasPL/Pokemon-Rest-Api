@@ -15,22 +15,22 @@ public class TypeConverter {
 
         for (Type type : pokemonTypes) {
             TypeDTO typeDTO = new TypeDTO();
-            typeDTO.setTypeID(type.getTypeID());
             typeDTO.setTypeName(type.getTypeName());
             typeDTOList.add(typeDTO);
         }
+
+        typeDTOList.sort((t1, t2) -> t1.getTypeName().compareToIgnoreCase(t2.getTypeName()));
 
         return typeDTOList;
 
     }
 
-            public static List<Type> convertToTypeList(List<TypeDTO> typesDTOList) {
+    public static List<Type> convertToTypeList(List<TypeDTO> typesDTOList) {
 
         List<Type> types = new ArrayList<>();
 
         for (TypeDTO typeDTO : typesDTOList) {
             Type type = new Type();
-            type.setTypeID(typeDTO.getTypeID());
             type.setTypeName(typeDTO.getTypeName());
             types.add(type);
         }
@@ -38,10 +38,4 @@ public class TypeConverter {
         return types;
     }
 
-    public static Type convertToType(TypeDTO typeDTO) {
-
-        Type type = new Type();
-        type.setTypeName(typeDTO.getTypeName());
-        return type;
-    }
 }

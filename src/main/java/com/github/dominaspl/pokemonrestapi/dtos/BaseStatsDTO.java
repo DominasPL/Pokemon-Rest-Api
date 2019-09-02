@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 @RequiredArgsConstructor
 public class BaseStatsDTO {
 
-    private Long baseStatsID;
-
     @NotNull(message = "HP must be given!")
     @Min(1) @Max(9999)
     private Integer hp;

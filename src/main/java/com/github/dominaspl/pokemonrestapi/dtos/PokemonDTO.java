@@ -14,8 +14,6 @@ import java.util.List;
 //@XmlRootElement
 public class PokemonDTO {
 
-    private Long pokemonID;
-
     @NotEmpty(message = "Pokemon name must be given!")
     @Size(min = 1, max = 30, message = "Pokemon name should have 1 to 30 characters!")
     private String pokemonName;

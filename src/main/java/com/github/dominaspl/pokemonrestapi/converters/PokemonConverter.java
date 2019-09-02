@@ -20,15 +20,15 @@ public class PokemonConverter {
             pokemonDTOList.add(convertToPokemonDTO(pokemon));
         }
 
-        pokemonDTOList.sort((o1, o2) -> o1.getPokemonID().compareTo(o2.getPokemonID()));
+        pokemonDTOList.sort((o1, o2) -> o1.getPokemonName().compareTo(o2.getPokemonName()));
 
         return pokemonDTOList;
+
     }
 
     public static PokemonDTO convertToPokemonDTO(Pokemon pokemon) {
 
         PokemonDTO pokemonDTO = new PokemonDTO();
-        pokemonDTO.setPokemonID(pokemon.getPokemonID());
         pokemonDTO.setPokemonName(pokemon.getPokemonName());
         pokemonDTO.setTypes(TypeConverter.convertToTypeDTOList(pokemon.getTypes()));
         pokemonDTO.setBaseStats(BaseStatsConverter.convertToBaseStatsDTO(pokemon.getBaseStats()));
