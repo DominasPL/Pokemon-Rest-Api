@@ -38,6 +38,7 @@ public class PokemonController {
     @PostMapping("/pokemon")
     @ResponseStatus(HttpStatus.CREATED)
     public PokemonDTO addPokemon(@Valid @RequestBody PokemonDTO pokemonDTO) {
+
         return pokemonService.savePokemon(pokemonDTO);
     }
 
@@ -53,5 +54,4 @@ public class PokemonController {
     public PokemonDTO deletePokemon(@PathVariable("id") @Positive Long id) {
         return pokemonService.deletePokemonFromRestApi(id);
     }
-
 }
