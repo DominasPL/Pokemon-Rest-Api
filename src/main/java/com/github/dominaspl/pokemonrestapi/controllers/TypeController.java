@@ -3,6 +3,7 @@ package com.github.dominaspl.pokemonrestapi.controllers;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.services.TypeService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping(TypeController.BASE_URL)
 public class TypeController {
 
@@ -37,8 +39,12 @@ public class TypeController {
     @ResponseStatus(HttpStatus.CREATED)
     public TypeDTO addNewType(@Valid @RequestBody TypeDTO typeDTO) {
 
-        typeService.saveType(typeDTO);
-        return typeDTO;
+        return typeService.saveType(typeDTO);
     }
 
+    @PutMapping("/types/type/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TypeDTO updateType(@PathVariable("id") @Positive Long id, @Valid @RequestBody TypeDTO typeDTO) {
+        return typeService.updateType(id, typeDTO);
+    }
 }

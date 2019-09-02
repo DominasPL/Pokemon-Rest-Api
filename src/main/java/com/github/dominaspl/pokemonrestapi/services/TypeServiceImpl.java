@@ -54,7 +54,7 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     @Transactional
-    public void saveType(TypeDTO typeDTO) {
+    public TypeDTO saveType(TypeDTO typeDTO) {
 
         if (typeDTO == null) {
             throw new IllegalArgumentException("Type must be given!");
@@ -67,6 +67,30 @@ public class TypeServiceImpl implements TypeService {
         }
 
         typeRepository.save(type);
+
+        return typeDTO;
+    }
+
+    @Override
+    @Transactional
+    public TypeDTO updateType(Long id, TypeDTO typeDTO) {
+
+        if (id == null || typeDTO == null) {
+            throw new IllegalArgumentException("Id and type must be given!");
+        }
+
+        Optional<Type> optionalType = typeRepository.findById(id);
+        Type type = optionalType.orElse(null);
+
+        if (type == null) {
+            return saveType(typeDTO);
+        }
+
+        type.setTypeName(typeDTO.getTypeName());
+        typeRepository.save(type);
+
+        return typeDTO;
+
     }
 
     public Set<TypeDTO> chooseCorrectTypes(List<TypeDTO> allTypes, List<TypeDTO> typesToCheck) {
