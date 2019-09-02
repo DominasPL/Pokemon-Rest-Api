@@ -3,11 +3,9 @@ package com.github.dominaspl.pokemonrestapi.controllers;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.services.TypeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -28,6 +26,11 @@ public class TypeController {
         return typeService.findAllTypes();
     }
 
+    @GetMapping("/types/type/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TypeDTO getTypeById(@PathVariable("id") @Positive Long id) {
+        return typeService.findTypeById(id);
+    }
 
 
 }

@@ -6,9 +6,9 @@ import com.github.dominaspl.pokemonrestapi.models.Type;
 import com.github.dominaspl.pokemonrestapi.repositories.TypeRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -30,7 +30,15 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public TypeDTO findTypeById(Long id) {
-        return null;
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Type> optionalType = typeRepository.findById(id);
+        Type type = optionalType.orElseThrow(() -> new IllegalStateException("Type not found!"));
+
+        return TypeConverter.convertToTypeDTO(type);
     }
 
     @Override

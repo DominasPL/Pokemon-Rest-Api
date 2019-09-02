@@ -38,4 +38,10 @@ public class TypeConverter {
         return types;
     }
 
+    public static TypeDTO convertToTypeDTO(Type type) {
+
+        TypeDTO typeDTO = new TypeDTO();
+        typeDTO.setTypeName(type.getTypeName());
+        return typeDTO;
+    }
 }
