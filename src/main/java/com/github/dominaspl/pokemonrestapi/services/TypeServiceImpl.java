@@ -5,6 +5,7 @@ import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.models.Type;
 import com.github.dominaspl.pokemonrestapi.repositories.StateRepository;
 import com.github.dominaspl.pokemonrestapi.repositories.TypeRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +17,12 @@ public class TypeServiceImpl implements TypeService {
 
     private TypeRepository typeRepository;
     private StateRepository stateRepository;
+    private PokemonService pokemonService;
 
-    public TypeServiceImpl(TypeRepository typeRepository, StateRepository stateRepository) {
+    public TypeServiceImpl(TypeRepository typeRepository, StateRepository stateRepository, @Lazy PokemonService pokemonService) {
         this.typeRepository = typeRepository;
         this.stateRepository = stateRepository;
+        this.pokemonService = pokemonService;
     }
 
     @Override
@@ -105,6 +108,8 @@ public class TypeServiceImpl implements TypeService {
 
         type.setState(stateRepository.findAll().get(1));
         typeRepository.save(type);
+
+        pokemonService.deletePokemonByTypeId(type.getTypeID());
 
         return TypeConverter.convertToTypeDTO(type);
     }

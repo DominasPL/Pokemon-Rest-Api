@@ -137,4 +137,17 @@ public class PokemonServiceImpl implements PokemonService {
 
         return PokemonConverter.convertToPokemonDTO(pokemon);
     }
+
+    @Override
+    @Transactional
+    public void deletePokemonByTypeId(Long typeId) {
+
+        if (typeId == null) {
+            throw new IllegalArgumentException("Type must be given!");
+        }
+
+        for (Pokemon pokemon : pokemonRepository.findPokemonsByTypeId(typeId)) {
+            pokemon.setState(stateService.findAllStates().get(1));
+        }
+    }
 }

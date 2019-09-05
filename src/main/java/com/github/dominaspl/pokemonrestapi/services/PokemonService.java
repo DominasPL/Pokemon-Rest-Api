@@ -11,4 +11,5 @@ public interface PokemonService {
     PokemonDTO savePokemon(PokemonDTO pokemonDTO);
     PokemonDTO updatePokemon(Long id, PokemonDTO pokemonDTO);
     PokemonDTO deletePokemonFromRestApi(Long id);
+    void deletePokemonByTypeId(Long id);
 }
