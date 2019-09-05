@@ -3,6 +3,7 @@ package com.github.dominaspl.pokemonrestapi.services;
 import com.github.dominaspl.pokemonrestapi.converters.TypeConverter;
 import com.github.dominaspl.pokemonrestapi.dtos.TypeDTO;
 import com.github.dominaspl.pokemonrestapi.models.Type;
+import com.github.dominaspl.pokemonrestapi.repositories.StateRepository;
 import com.github.dominaspl.pokemonrestapi.repositories.TypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 public class TypeServiceImpl implements TypeService {
 
     private TypeRepository typeRepository;
+    private StateRepository stateRepository;
 
-    public TypeServiceImpl(TypeRepository typeRepository) {
+    public TypeServiceImpl(TypeRepository typeRepository, StateRepository stateRepository) {
         this.typeRepository = typeRepository;
+        this.stateRepository = stateRepository;
     }
 
     @Override
@@ -88,6 +91,22 @@ public class TypeServiceImpl implements TypeService {
 
         return typeDTO;
 
+    }
+
+    @Override
+    public TypeDTO deleteType(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Type> optionalType = typeRepository.findById(id);
+        Type type = optionalType.orElseThrow(() -> new IllegalStateException("Type not found"));
+
+        type.setState(stateRepository.findAll().get(1));
+        typeRepository.save(type);
+
+        return TypeConverter.convertToTypeDTO(type);
     }
 
 

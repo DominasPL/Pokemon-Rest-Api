@@ -24,5 +24,9 @@ public class Type {
     @ManyToMany(mappedBy = "types")
     private List<Pokemon> pokemons = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "state_id", referencedColumnName = "state_id")
+    private State state;
+
 
 }

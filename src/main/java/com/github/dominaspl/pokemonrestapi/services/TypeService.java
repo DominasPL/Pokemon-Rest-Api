@@ -12,4 +12,5 @@ public interface TypeService {
     Set<TypeDTO> checkTypesInDatabase(List<TypeDTO> types);
     TypeDTO saveType(TypeDTO typeDTO);
     TypeDTO updateType(Long id, TypeDTO typeDTO);
+    TypeDTO deleteType(Long id);
 }

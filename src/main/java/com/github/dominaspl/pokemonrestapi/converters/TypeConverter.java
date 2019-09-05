@@ -41,6 +41,7 @@ public class TypeConverter {
     public static TypeDTO convertToTypeDTO(Type type) {
 
         TypeDTO typeDTO = new TypeDTO();
+        typeDTO.setId(type.getTypeID());
         typeDTO.setTypeName(type.getTypeName());
         return typeDTO;
     }
