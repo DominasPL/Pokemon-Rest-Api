@@ -76,7 +76,6 @@ public class PokemonServiceImpl implements PokemonService {
         }
 
         Pokemon pokemon = PokemonConverter.convertToPokemon(pokemonDTO, correctTypes, stateService.findAllStates().get(0));
-
         pokemonRepository.save(pokemon);
 
         return PokemonConverter.convertToPokemonDTO(pokemon);

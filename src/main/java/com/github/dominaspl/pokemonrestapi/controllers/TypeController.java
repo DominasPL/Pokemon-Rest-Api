@@ -47,4 +47,9 @@ public class TypeController {
     public TypeDTO updateType(@PathVariable("id") @Positive Long id, @Valid @RequestBody TypeDTO typeDTO) {
         return typeService.updateType(id, typeDTO);
     }
+
+//    @DeleteMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public TypeDTO deleteType(@PathVariable("id") @Positive Long id, )
+
 }

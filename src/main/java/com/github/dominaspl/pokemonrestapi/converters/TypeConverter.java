@@ -14,6 +14,7 @@ public class TypeConverter {
         List<TypeDTO> typeDTOList = new ArrayList<>();
         for (Type type : pokemonTypes) {
             TypeDTO typeDTO = new TypeDTO();
+            typeDTO.setId(type.getTypeID());
             typeDTO.setTypeName(type.getTypeName());
             typeDTOList.add(typeDTO);
         }
@@ -29,6 +30,7 @@ public class TypeConverter {
 
         for (TypeDTO typeDTO : typesDTOList) {
             Type type = new Type();
+            type.setTypeID(typeDTO.getId());
             type.setTypeName(typeDTO.getTypeName());
             types.add(type);
         }
