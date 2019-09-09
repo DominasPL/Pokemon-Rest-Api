@@ -43,6 +43,7 @@ This request change type state to not active. It also change pokemon state to no
 - REST
 - Spring
 - Spring Boot
+- Spring Security
 - Hibernate
 - MySQL
 - Tomcat
