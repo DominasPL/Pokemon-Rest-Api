@@ -23,33 +23,33 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    @GetMapping
+    @GetMapping(produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public List<PokemonDTO> getAllPokemons() {
         return pokemonService.findAllPokemons();
     }
 
-    @GetMapping("/pokemon/{id}")
+    @GetMapping(path ="/pokemon/{id}", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public PokemonDTO getPokemonById(@PathVariable("id") @Positive Long id) {
         return pokemonService.findPokemonById(id);
     }
 
-    @PostMapping("/pokemon")
+    @PostMapping(path = "/pokemon", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public PokemonDTO addPokemon(@Valid @RequestBody PokemonDTO pokemonDTO) {
 
         return pokemonService.savePokemon(pokemonDTO);
     }
 
-    @PutMapping("/pokemon/{id}")
+    @PutMapping(path = "/pokemon/{id}", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public PokemonDTO updatePokemon(@PathVariable("id") @Positive Long id, @Valid @RequestBody PokemonDTO pokemonDTO) {
 
         return pokemonService.updatePokemon(id, pokemonDTO);
     }
 
-    @DeleteMapping("/pokemon/{id}")
+    @DeleteMapping(path = "/pokemon/{id}", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public PokemonDTO deletePokemon(@PathVariable("id") @Positive Long id) {
         return pokemonService.deletePokemonFromRestApi(id);
