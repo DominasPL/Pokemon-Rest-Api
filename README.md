@@ -1,7 +1,7 @@
 ![il_794xN 1036925932_92aj](https://user-images.githubusercontent.com/47396707/64368441-a061c580-d01a-11e9-997e-6acca7fab6b9.jpg)
 
 # Pokemon-RESTful-WebService
-It is a simple first generation pokemon Rest Web Service. There are endpoints which can be accessed sending HTTP requests. 
+It is a simple first generation pokemon RESTful Web Service. There are endpoints which can be accessed sending HTTP requests. 
 In response you will receive data like pokemon name, pokemon types etc. in JSON format. All endpoints are described below.
 
 ## Endpoints
